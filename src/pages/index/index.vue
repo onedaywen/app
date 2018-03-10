@@ -4,7 +4,7 @@
 		<div class="index-content">
 			<ul class="img-list">
 				<li v-for="x in imglist">
-					<div>
+					<div class="img-item">
 						<img :src="x.src">
 					</div>
 				</li>
