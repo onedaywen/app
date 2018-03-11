@@ -10,6 +10,7 @@ export default {
 
 	computed: mapState({
 		index: state => state.index,
+		navList: state => state.index.navList,
 		imglist: state => state.index.imglist,
 
 	}),

@@ -1,11 +1,21 @@
 <template>
 	<div class="index">
-		<div class="title">{{ title }}</div>
 		<div class="index-content">
+			<ul class="nav-list clear" >
+				<li v-for="x in navList">
+					<img :src="x.src">
+					<p>
+						{{ x.name }}
+					</p>
+				</li>
+			</ul>
 			<ul class="img-list">
-				<li v-for="x in imglist">
+				<li v-for="x in imglist" class="clear">
 					<div class="img-item">
 						<img :src="x.src">
+					</div>
+					<div class="img-desc">
+						<p>{{ x.itemName }}</p>
 					</div>
 				</li>
 			</ul>

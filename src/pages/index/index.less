@@ -1,25 +1,45 @@
 @import '../../common/less/variable.less';
 .index {
-	.title {
-		.height(100);
-		.line-height(100);
-		.font-size(30);
-		text-align: center;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		color: #1abc9c;
-		cursor: pointer;
-	}
+
 	.index-content {
-		.margin-top(110);
-		.img-list {
+		background: url(../../common/images/1.jpg);
+		.nav-list {
+			.height(400);
 			> li {
+				.width(187.5);
+				.height(200);
+				.padding-top(150);
+				box-sizing: border-box;
+				float: left;
+				> img {
+					display: block;
+					margin: 0 auto;
+					.width(150);
+					.height(150);
+				}
+				> p {
+					.font-size(30);
+					text-align: center;
+				}
+
+			}
+		}
+		.img-list {
+
+			.margin-top(200);
+			> li {
+				.margin-bottom(20);
 				.img-item {
 					.width(200);
 					height: auto;
-					
+					float: left;
+				}
+				.img-desc {
+					.width(550);
+					float: left;
+					box-sizing: border-box;
+					.font-size(30);
+					.padding(10, 10, 10, 10);
 				}
 			}
 		}

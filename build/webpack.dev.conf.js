@@ -6,6 +6,18 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 const mockWebpackPlugin = require('mock-webpack-plugin');
 const mockConfig = require('../mock/config.js');
 
+const getIPAdress = function() {
+    var interfaces = require('os').networkInterfaces();
+    for (var devName in interfaces) {
+        var iface = interfaces[devName];
+        for (var i = 0; i < iface.length; i++) {
+            var alias = iface[i];
+            if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+                return alias.address;
+            }
+        }
+    }
+}
 
 module.exports = {
 	entry: {
@@ -15,10 +27,12 @@ module.exports = {
 
 	output: {
 		path: resolve(__dirname, '../dist'),
-		filename: 'js/[name]_[hash].js'
+		filename: 'js/[name]_[hash].js',
+
 	},
 	
 	devServer: {
+		host: getIPAdress() || '127.0.0.1',
 		proxy: {
         	'/f/d': 'http://localhost:8000'
 	    }
@@ -42,8 +56,8 @@ module.exports = {
 				include: src
 			},
 			{
-				test: /\.(png|jpg|jpeg)$/,
-				use: 'url-loader?limit=8192',
+				test: /\.(png|woff|woff2|eot|ttf|svg|jpg|gif)$/,
+				use: 'url-loader?limit=8192&name=images/[name].[hash].[ext]',
 				include: src
 			}
 		]

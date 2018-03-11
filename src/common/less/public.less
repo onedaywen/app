@@ -5,3 +5,11 @@
 	.padding(0, 10, 0, 10);
 	border: solid 1px #999;
 }
+
+.clear {
+	&&::after {
+		display: block;
+		content: '';
+		clear: both;
+	}
+}
