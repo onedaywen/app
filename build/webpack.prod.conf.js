@@ -3,6 +3,7 @@ const path = require('path');
 const resolve = path.resolve;
 const src = resolve(__dirname, '../src');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const extractTextPlugin = require("extract-text-webpack-plugin");
 const cleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {

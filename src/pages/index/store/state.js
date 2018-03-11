@@ -1,7 +1,7 @@
 module.exports = {
 	navList: [
 		{
-			src: '../../../common/images/1.jpg',
+			src: 'src/common/images/1.jpg',
 			name: '找攻略',
 		},
 		{

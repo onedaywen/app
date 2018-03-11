@@ -5,7 +5,16 @@
 > 2.答案：
 > 3.问题：场景实现：实现在开发环境、测试环境、线上环境pc端跳转到h5端？技术上就是要在不同环境下生成不一样的域名前缀，与路径、资源名称配合。
 > 3.解决:
-> 4.
+> 4.问题: 下列extract-text-webpack-plugin配置分离css在vue-loader中不生效，在app.js入口文件中测试可以生效。
+```
+{ 
+	test: /\.less$/, 
+	use: ExtractTextPlugin.extract({
+		fallback: 'style-loader',
+		use: ['css-loader', 'less-loader']
+	})
+},
+```
 
 ## 采用less + rem + js结合实现终端适配
 > 1. 首先设计稿宽度为750.

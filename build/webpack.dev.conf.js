@@ -3,6 +3,7 @@ const path = require('path');
 const resolve = path.resolve;
 const src = resolve(__dirname, '../src');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const extractTextPlugin = require("extract-text-webpack-plugin");
 const mockWebpackPlugin = require('mock-webpack-plugin');
 const mockConfig = require('../mock/config.js');
 
@@ -48,18 +49,26 @@ module.exports = {
 			{
 				test: /\.vue$/,
 				use: 'vue-loader',
-				include: src
-			},
-			{
-				test: /\.less$/,
-				use: ['style-loader', 'css-loader', 'less-loader'],
-				include: src
+				include: src,
+	      //       options: {
+				   //  use: {
+				   //    less: 'vue-style-loader!css-loader!less-loader',
+				   //  },
+				   //  extractCSS: true
+			    // }
 			},
 			{
 				test: /\.(png|woff|woff2|eot|ttf|svg|jpg|gif)$/,
 				use: 'url-loader?limit=8192&name=images/[name].[hash].[ext]',
 				include: src
-			}
+			},
+			{ 
+				test: /\.less$/, 
+				use: extractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: ['css-loader', 'less-loader']
+				})
+			},
 		]
 	},
 
@@ -87,7 +96,9 @@ module.exports = {
 		}),
 		new webpack.ProvidePlugin({
 		  api: 'api'
+		}),
+		new extractTextPlugin({
+			filename: "css/[name].css",
 		})
-
 	]
 }

@@ -1,6 +1,7 @@
 import ajax from 'common/js/ajax.js'
 import { mapState } from 'vuex';
 import indexStore from 'src/pages/index/store/index.js';
+// require('./test.less');
 export default {
 	data () {
 		return {
