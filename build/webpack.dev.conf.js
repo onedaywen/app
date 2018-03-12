@@ -1,4 +1,4 @@
- const webpack = require('webpack');
+const webpack = require('webpack');
 const path = require('path');
 const resolve = path.resolve;
 const src = resolve(__dirname, '../src');

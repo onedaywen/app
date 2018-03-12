@@ -1,5 +1,6 @@
 <template>
 	<div class="index">
+		<rowscolsTable/>
 		<div class="index-content">
 			<ul class="nav-list clear" >
 				<li v-for="x in navList">
