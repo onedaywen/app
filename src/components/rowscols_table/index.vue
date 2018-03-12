@@ -50,30 +50,47 @@
 					:class="y.class"
 					:colspan="y.colspan || 1"
 					:rowspan="y.rowspan || 1">
-					<div v-if="y.text">
-						{{ y.text }}
-					</div>
 
-					<div v-if="!y || typeof y === 'string' || typeof y === 'number'">
+					<span v-if="y.text" @click="y.click && y.click()">
+						{{ y.text }}
+					</span>
+					<span v-if="!y || typeof y === 'string' || typeof y === 'number'">
 						{{ y || '' }}
-					</div>
+					</span>
+					<img :src="y.src + 'asdfasdf'"
+						 v-if="y.src"
+						 @click="y.click && y.click()">
+					<input type="text" name="" 
+							   v-if="y.vmodel"
+							   v-model="y.vmodel"
+							   :readonly="y.readonly"
+							   @focus="y.focus && y.focus()"
+							   @change="y.change && y.change()">	 
+
 
 					<div v-if="y.data && y.data.length"
 						 :style="z.style" 
 						 :class="z.class"
 						 v-for="z in y.data">
-						<span v-if="z.text">
+
+						<span v-if="z.text" @click="z.click && z.click()">
 							{{ z.text }}
 						</span>
+
 						<span v-if="!z || typeof z === 'string' || typeof z === 'number'">
 							{{ z || ''}}
 						</span>
+
 						<img :src="z.src"
-							 v-if="z.src">
+							 v-if="z.src"
+							 @click="z.click && z.click()">
+
 						<input type="text" name="" 
 							   v-if="z.vmodel"
 							   v-model="z.vmodel"
-							   :readonly="z.readonly">
+							   :readonly="z.readonly"
+							   @focus="y.focus && y.focus()"
+							   @change="y.change && y.change()">
 					</div>
 				</td>
 			</tr>
@@ -207,12 +224,17 @@
 							},
 						],
 						[
-							// {
-							// 	text: 1111,
-							// },
-							'asdfasdfasfd',
 							{
-								colspan: 3,
+								src: 'asdfasdf.jpg',
+								click () {
+									alert('asdfasjdlkf')
+								}
+							},
+							{
+								vmodel: 1111,
+							},
+							{
+								colspan: 2,
 								text: 22222,
 							},
 							{
@@ -223,6 +245,12 @@
 						[
 							{
 								text: 4444,
+								style: {
+									color: 'skyblue'
+								},
+								click () {
+									alert('click')
+								}
 							},
 							{
 								colspan: 2,
@@ -252,6 +280,17 @@
 			td, th {
 				padding: 5px;
 				border: solid 1px #999;
+				input {
+					width: 80%;
+					padding: 0 10px;
+					height: 30px;
+					vertical-align: middle;
+				}
+				img {
+					width: 80%;
+					height: auto;
+					vertical-align: middle;
+				}
 			}
 		}
 	}
