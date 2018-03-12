@@ -50,9 +50,14 @@
 					:class="y.class"
 					:colspan="y.colspan || 1"
 					:rowspan="y.rowspan || 1">
-					<div v-if="!y.data">
+					<div v-if="y.text">
 						{{ y.text }}
 					</div>
+
+					<div v-if="!y || typeof y === 'string' || typeof y === 'number'">
+						{{ y || '' }}
+					</div>
+
 					<div v-if="y.data && y.data.length"
 						 :style="z.style" 
 						 :class="z.class"
@@ -61,7 +66,7 @@
 							{{ z.text }}
 						</span>
 						<span v-if="!z || typeof z === 'string' || typeof z === 'number'">
-							{{ z }}
+							{{ z || ''}}
 						</span>
 						<img :src="z.src"
 							 v-if="z.src">
@@ -202,9 +207,10 @@
 							},
 						],
 						[
-							{
-								text: 1111,
-							},
+							// {
+							// 	text: 1111,
+							// },
+							'asdfasdfasfd',
 							{
 								colspan: 3,
 								text: 22222,
@@ -212,7 +218,7 @@
 							{
 								rowspan: 2,
 								text: 3333,
-							}
+							},
 						],
 						[
 							{
