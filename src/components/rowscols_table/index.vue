@@ -1,6 +1,6 @@
 <template>
 	<div class="rowscols-table-box">
-		<table class="rowscols-table">
+		<!-- <table class="rowscols-table">
 			<tr>
 				<th v-for="x in param.titleArr" :style="x.style" :class="x.class">
 					{{ x.text }}
@@ -34,7 +34,7 @@
 					</div>
 				</td>
 			</tr>
-		</table>
+		</table> -->
 
 		<table class="rowscols-table">
 			<tr>
@@ -57,7 +57,7 @@
 					<span v-if="!y || typeof y === 'string' || typeof y === 'number'">
 						{{ y || '' }}
 					</span>
-					<img :src="y.src + 'asdfasdf'"
+					<img :src="y.src"
 						 v-if="y.src"
 						 @click="y.click && y.click()">
 					<input type="text" name="" 
@@ -92,6 +92,8 @@
 							   @focus="y.focus && y.focus()"
 							   @change="y.change && y.change()">
 					</div>
+
+					
 				</td>
 			</tr>
 		</table>
@@ -110,83 +112,83 @@
 		// }
 		data () {
 			return {
-				param: {
-					titleArr: [
-						{
-							text: 'aaaaa11'
-						},{
-							text: 'aaaaa12'
-						},{
-							text: 'aaaaa13'
-						},{
-							text: 'aaaaa14'
-						},{
-							text: 'aaaaa15'
-						}
-					],
-					trArr:[
-						//trObj
-						{
-							class: 'totalcols',
-							data: [
-								{
-									data: [
-										{
-											text:'11111',
-											src:'asdfka.jpg',
-											vmodel: 'hello world'
-										}
-									]
-								},
-								{
-									colspan: 3,
-									data: [
-										{
-											text: '22222221'
-										},
-										222233332,
-										'222233333',
-									]
-								},
-								{
-									rowspan: 2,
-									data: [
-										{
-											text:'33333'
-										}
-									]
-								}
-							]
-						},
-						{
-							class: 'totalcols',
-							data: [
-								{
-									data: [
-										{
-											text:'44444'
-										}
-									]
-								},
-								{
-									colspan: 2,
-									data: [
-										{
-											text:'5555'
-										}
-									]
-								},
-								{
-									data: [
-										{
-											text:'66666'
-										}
-									]
-								}
-							]
-						}
-					]
-				},
+				// param: {
+				// 	titleArr: [
+				// 		{
+				// 			text: 'aaaaa11'
+				// 		},{
+				// 			text: 'aaaaa12'
+				// 		},{
+				// 			text: 'aaaaa13'
+				// 		},{
+				// 			text: 'aaaaa14'
+				// 		},{
+				// 			text: 'aaaaa15'
+				// 		}
+				// 	],
+				// 	trArr:[
+				// 		//trObj
+				// 		{
+				// 			class: 'totalcols',
+				// 			data: [
+				// 				{
+				// 					data: [
+				// 						{
+				// 							text:'11111',
+				// 							src:'asdfka.jpg',
+				// 							vmodel: 'hello world'
+				// 						}
+				// 					]
+				// 				},
+				// 				{
+				// 					colspan: 3,
+				// 					data: [
+				// 						{
+				// 							text: '22222221'
+				// 						},
+				// 						222233332,
+				// 						'222233333',
+				// 					]
+				// 				},
+				// 				{
+				// 					rowspan: 2,
+				// 					data: [
+				// 						{
+				// 							text:'33333'
+				// 						}
+				// 					]
+				// 				}
+				// 			]
+				// 		},
+				// 		{
+				// 			class: 'totalcols',
+				// 			data: [
+				// 				{
+				// 					data: [
+				// 						{
+				// 							text:'44444'
+				// 						}
+				// 					]
+				// 				},
+				// 				{
+				// 					colspan: 2,
+				// 					data: [
+				// 						{
+				// 							text:'5555'
+				// 						}
+				// 					]
+				// 				},
+				// 				{
+				// 					data: [
+				// 						{
+				// 							text:'66666'
+				// 						}
+				// 					]
+				// 				}
+				// 			]
+				// 		}
+				// 	]
+				// },
 
 				param2: {
 					titleArr: [
