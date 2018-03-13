@@ -3,6 +3,9 @@
 		<slot name="listslot">
 
 		</slot>
+		<div class="footer-tips" v-show="param.pageNum === param.pageMax">
+			到底啦。。。
+		</div>
 	</div>
 </template>
 
@@ -10,6 +13,15 @@
 	const List = {
 		name: 'List',
 		props: {
+			/**
+			 * @type {Object}
+			 * {
+			 *   data: [],
+			 *   add () {},
+			 *   pageNum: 1,
+			 *   pageMax: 10,
+			 * }
+			 */
 			param: {
 				type: Object,
 				require: true
@@ -41,7 +53,10 @@
 		            var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
 		            if(document.documentElement.scrollHeight == document.documentElement.clientHeight + scrollTop ) {
 		                if(typeof param.add == 'function') {
+		                	if(param.pageNum >= param.pageMax) return;
 		                	param.add();
+		                	param.pageNum++;
+		                	
 		                }
 		            }        
 
@@ -59,8 +74,14 @@
 	.pull-list {
 		.padding(10, 10, 10, 10);
 		.font-size(30);
+		margin-bottom: 120px;
 		> p {
 			.height(200);
+		}
+		.footer-tips {
+			text-align: center;
+			.font-size(30);
+			color: #999;
 		}
 	}
 </style>

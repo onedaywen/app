@@ -21,7 +21,6 @@ export default {
 		}
 		this.$nextTick(() => {
 			this.$store.state.personalCenter.param.add =  (list) => {
-				console.log(list)
 				this.getData();
 			};
 		});
@@ -32,7 +31,7 @@ export default {
 	},
 
 	methods: {
-		getData () {
+		getData (list) {
 
 			let p = new Promise((resolve, reject) => {
 				setTimeout(() => {
@@ -41,7 +40,7 @@ export default {
 			});
 			p.then(data => {
 				const param = this.$store.state.personalCenter.param;
-				for(let i = 0; i< 1000; i++){
+				for(let i = 0; i< 10; i++){
 					param.data.push(`src/common/images/${i%3 + 1}.jpg?${Math.random()}`);
 				}
 			})

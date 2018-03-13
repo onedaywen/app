@@ -1,6 +1,8 @@
 module.exports = {
 	param: {
 		data: [],
-		add () {}
+		add () {},
+		pageNum: 1,
+		pageMax: 3,
 	}
 };
