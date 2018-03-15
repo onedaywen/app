@@ -2,6 +2,7 @@ import ajax from 'common/js/ajax.js'
 import { mapState } from 'vuex';
 import indexStore from 'src/pages/index/store/index.js';
 import rowscolsTable from 'components/rowscols_table/index.vue';
+import MonthPicker from 'components/month_picker/index.vue';
 export default {
 	data () {
 		return {
@@ -11,12 +12,14 @@ export default {
 
 	components: {
 		rowscolsTable,
+		MonthPicker
 	},
 
 	computed: mapState({
 		index: state => state.index,
 		navList: state => state.index.navList,
 		imglist: state => state.index.imglist,
+		monthPickerParam: state => state.index.monthPickerParam,
 
 	}),
 
