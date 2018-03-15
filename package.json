@@ -35,6 +35,7 @@
     "url-loader": "^1.0.1",
     "vue": "^2.5.13",
     "vue-axios": "^2.0.2",
+    "vue-dropload": "^1.0.16",
     "vue-loader": "^14.1.1",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.13",

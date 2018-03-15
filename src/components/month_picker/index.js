@@ -1,3 +1,4 @@
+/* design by wenyitian 20180315 **/
 const D = new Date();
 const TOYEAR = D.getFullYear();//今年
 const TOMONTH = D.getMonth() + 1;//今月
@@ -23,6 +24,14 @@ const MONTHLIST = [
 const monthPciker = {
 	name: 'monthPciker',
 	props: {
+		/*	monthPickerParam: {
+				year: '',
+				month: '',
+				value: '',
+				limitStart: '',
+				limitEnd: '',
+			}
+		*/
 		param: {
 			type: Object,
 			required: true

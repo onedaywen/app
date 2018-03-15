@@ -19,5 +19,7 @@ module.exports = {
 		year: '',
 		month: '',
 		value: '',
+		limitStart: '',
+		limitEnd: '',
 	}
 };

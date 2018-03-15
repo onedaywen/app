@@ -29,6 +29,7 @@ module.exports = {
 	output: {
 		path: resolve(__dirname, '../dist'),
 		filename: 'js/[name]_[hash].js',
+		publicPath: 'http://192.168.1.3:8080/',
 
 	},
 	
@@ -59,7 +60,7 @@ module.exports = {
 			},
 			{
 				test: /\.(png|woff|woff2|eot|ttf|svg|jpg|gif)$/,
-				use: 'url-loader?limit=8192&name=images/[name].[hash].[ext]',
+				use: 'url-loader?limit=8192&name=images/[name].[ext]',
 				include: src
 			},
 			{ 
