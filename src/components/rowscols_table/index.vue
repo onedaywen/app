@@ -1,13 +1,13 @@
 <template>
 	<div class="rowscols-table-box">
-
 		<table class="rowscols-table">
 			<tr>
 				<th v-for="x in param.titleArr" 
-					:style="x.style" :class="x.class" 
+					:style="x.style" 
+					:class="x.class" :width="x.width"
 					@mousedown="mousedown($event, x)"
 					@mouseup="mouseup($event, x)">
-					{{ x.text }}
+					<TdTemplate :param="x"/>
 				</th>
 			</tr>
 			<tr v-for="x in param.contentArr"  
@@ -18,48 +18,7 @@
 					:class="y.class"
 					:colspan="y.colspan || 1"
 					:rowspan="y.rowspan || 1">
-
-					<span v-if="y.text" @click="y.click && y.click()">
-						{{ y.text }}
-					</span>
-					<span v-if="!y || typeof y === 'string' || typeof y === 'number'">
-						{{ y || '' }}
-					</span>
-					<img :src="y.src"
-						 v-if="y.src"
-						 @click="y.click && y.click()">
-					<input type="text" name="" 
-							   v-if="y.vmodel"
-							   v-model="y.vmodel"
-							   :readonly="y.readonly"
-							   @focus="y.focus && y.focus()"
-							   @change="y.change && y.change()">	 
-
-					<div v-if="y.data && y.data.length"
-						 :style="z.style" 
-						 :class="z.class"
-						 v-for="z in y.data">
-
-						<span v-if="z.text" @click="z.click && z.click()">
-							{{ z.text }}
-						</span>
-
-						<span v-if="!z || typeof z === 'string' || typeof z === 'number'">
-							{{ z || ''}}
-						</span>
-
-						<img :src="z.src"
-							 v-if="z.src"
-							 @click="z.click && z.click()">
-
-						<input type="text" name="" 
-							   v-if="z.vmodel"
-							   v-model="z.vmodel"
-							   :readonly="z.readonly"
-							   @focus="y.focus && y.focus()"
-							   @change="y.change && y.change()">
-					</div>
-
+					<TdTemplate :param="y"/>
 				</td>
 			</tr>
 		</table>
@@ -68,103 +27,165 @@
 
 
 <script type="text/javascript">
+	import TdTemplate from './td_template.vue';
 	const rowscolsTable = {
 		name: 'rowscolsTable',
-		// props: {
-		// 	param: {
-		// 		type: Object,
-		// 		require: true
-		// 	}
-		// }
+		components: {
+			TdTemplate
+		},
+
 		data () {
 			return {
 				eventTarget: '',
 				param: {
 					titleArr: [
+						'商品',
+						'单价/数量',
+						'实付金额',
+						'运费',
+						'订单/包裹状态',
+						'买家',
+						'物流信息',
 						{
-							text: 'aaaaa11',
-							style: {
-								width: '100px'
-							}
-						},{
-							text: 'aaaaa12',
-							style: {
-								width: '100px'
-							}
-						},{
-							text: 'aaaaa13',
-							style: {
-								width: '100px'
-							}
-						},{
-							text: 'aaaaa14',
-							style: {
-								width: '100px'
-							}
-						},{
-							text: 'aaaaa15',
-							style: {
-								width: '100px'
+							text: '操作',
+							click () {
+								alert('操作')
 							}
 						}
 					],
 					contentArr: [
 						[
+			  
 							{
-								colspan: 5,
+								colspan: 8,
 								data: [
 									{
-										text: '总1'
-									},{
-										text: '总2'
-									},{
-										text: '总3'
+										class: 'order-code',
+										style: {
+											color: '#1abc9c'
+										},
+										text: '订单号码： 105240184796',
+										click () {
+											alert('跳转到订单详情页')
+										}
 									},
-									'zong 4',
+									'下单时间：2018-03-16 15:34:35',
+									'交易单号：2018031621001004150527890114',
+									'总额：￥0.40元',
+									'已退款'
+								]
+							},
+						],
+						[
+			  
+							{
+								colspan: 8,
+								data: [
+									'店铺名称：WG的小店',
 									{
-										src: 'asdfasdf.jpg'
-									},{
-										vmodel: 'shuangxiang'
-									}
+										text: '包裹单号： 205790199196',
+										class: 'package-code',
+										style: {
+											color: '#1abc9c'
+										},
+										click () {
+											alert('跳转到包裹详情页')
+										}
+									},
+									'营业点名称：永新汇地下仓库'
 								]
 							},
 						],
 						[
 							{
-								src: 'asdfasdf.jpg',
-								click () {
-									alert('asdfasjdlkf')
-								}
+								data: [
+									{
+										src: 'asdfasdf.jpg',
+										click () {
+											alert('全屏查看图片')
+										},
+									},{
+										text: '商品名称001',
+									},{
+										text: '商品规格001',
+									},{
+										text: '商品留言001',
+									}
+								]
+								
 							},
+							'19.9*100',
+							'1990',
 							{
-								vmodel: 1111,
-							},
-							{
-								colspan: 2,
-								text: 22222,
-							},
-							{
-								rowspan: 2,
-								text: 3333,
-							},
+								rowspan: 3,
+								text: '24.00'
+							},{
+								rowspan: 3,
+								text: '退款完成'
+							},{
+								rowspan: 3,
+								data: [
+									'买家姓名：温一天',
+									'买家手机号：13714034157'
+								]
+							},{
+								rowspan: 3,
+								text: '商品已发往深圳松岗分拨中心'
+							},{
+								rowspan: 3,
+								data: [
+									{
+										class: 'confirm',
+										text: '确认收货',
+										click () {
+											alert('确认收货')
+										}
+									}
+								]
+								
+							}
 						],
 						[
 							{
-								text: 4444,
-								style: {
-									color: 'skyblue'
-								},
-								click () {
-									alert('click')
-								}
+								data: [
+									{
+										src: 'asdfasdf.jpg',
+										click () {
+											alert('全屏查看图片')
+										},
+									},{
+										text: '商品名称002',
+									},{
+										text: '商品规格002',
+									},{
+										text: '商品留言002',
+									}
+								]
+								
 							},
+							'29.9*100',
+							'2990'
+						],
+						[
 							{
-								colspan: 2,
-								text: 5555,
+								data: [
+									{
+										src: 'asdfasdf.jpg',
+										click () {
+											alert('全屏查看图片')
+										},
+									},{
+										text: '商品名称003',
+									},{
+										text: '商品规格003',
+									},{
+										text: '商品留言003',
+									}
+								]
+								
 							},
-							{
-								text: 6666,
-							}
+							'39.9*100',
+							'3990'
 						]
 					]
 				}

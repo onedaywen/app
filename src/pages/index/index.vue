@@ -1,8 +1,8 @@
 <template>
 	<div class="index">
-		<div style="width: 220px;margin: 500px;">
+		<!-- <div style="width: 220px;">
 			<MonthPicker :param="monthPickerParam"/>
-		</div>
+		</div> -->
 		<rowscolsTable/>
 		<div class="index-content">
 
