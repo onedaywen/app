@@ -3,6 +3,6 @@ module.exports = {
 		data: [],
 		add () {},
 		pageNum: 1,
-		pageMax: 3,
+		pageMax: 10,
 	}
 };

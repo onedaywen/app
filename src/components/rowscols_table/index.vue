@@ -1,48 +1,16 @@
 <template>
 	<div class="rowscols-table-box">
-		<!-- <table class="rowscols-table">
-			<tr>
-				<th v-for="x in param.titleArr" :style="x.style" :class="x.class">
-					{{ x.text }}
-				</th>
-			</tr>
-			<tr v-for="trObj in param.trArr"  
-				:style="trObj.style" 
-				:class="trObj.class">
-				<td v-for="tdObj in trObj.data"
-					:style="tdObj.style" 
-					:class="tdObj.class"
-					:colspan="tdObj.colspan || 1"
-					:rowspan="tdObj.rowspan || 1">
-					<div v-if="dObj"
-						 v-for="dObj in tdObj.data"
-						 :style="dObj.style" 
-						 :class="dObj.class"
-						 @click="dObj.click && dObj.click()">
-						<span v-if="dObj.text">
-							{{ dObj.text }}
-						</span>
-						<input type="text" name="" 
-							   v-if="dObj.vmodel"
-							   v-model="dObj.vmodel"
-							   :readonly="dObj.readonly">
-						<img :src="dObj.src"
-							 v-if="dObj.src">
-						<span v-if="!dObj || typeof dObj === 'string' || typeof dObj === 'number'">
-							{{ dObj }}
-						</span>
-					</div>
-				</td>
-			</tr>
-		</table> -->
 
 		<table class="rowscols-table">
 			<tr>
-				<th v-for="x in param2.titleArr" :style="x.style" :class="x.class">
+				<th v-for="x in param.titleArr" 
+					:style="x.style" :class="x.class" 
+					@mousedown="mousedown($event, x)"
+					@mouseup="mouseup($event, x)">
 					{{ x.text }}
 				</th>
 			</tr>
-			<tr v-for="x in param2.contentArr"  
+			<tr v-for="x in param.contentArr"  
 				:style="x.style" 
 				:class="x.class">
 				<td v-for="y in x"
@@ -66,7 +34,6 @@
 							   :readonly="y.readonly"
 							   @focus="y.focus && y.focus()"
 							   @change="y.change && y.change()">	 
-
 
 					<div v-if="y.data && y.data.length"
 						 :style="z.style" 
@@ -93,7 +60,6 @@
 							   @change="y.change && y.change()">
 					</div>
 
-					
 				</td>
 			</tr>
 		</table>
@@ -112,96 +78,34 @@
 		// }
 		data () {
 			return {
-				// param: {
-				// 	titleArr: [
-				// 		{
-				// 			text: 'aaaaa11'
-				// 		},{
-				// 			text: 'aaaaa12'
-				// 		},{
-				// 			text: 'aaaaa13'
-				// 		},{
-				// 			text: 'aaaaa14'
-				// 		},{
-				// 			text: 'aaaaa15'
-				// 		}
-				// 	],
-				// 	trArr:[
-				// 		//trObj
-				// 		{
-				// 			class: 'totalcols',
-				// 			data: [
-				// 				{
-				// 					data: [
-				// 						{
-				// 							text:'11111',
-				// 							src:'asdfka.jpg',
-				// 							vmodel: 'hello world'
-				// 						}
-				// 					]
-				// 				},
-				// 				{
-				// 					colspan: 3,
-				// 					data: [
-				// 						{
-				// 							text: '22222221'
-				// 						},
-				// 						222233332,
-				// 						'222233333',
-				// 					]
-				// 				},
-				// 				{
-				// 					rowspan: 2,
-				// 					data: [
-				// 						{
-				// 							text:'33333'
-				// 						}
-				// 					]
-				// 				}
-				// 			]
-				// 		},
-				// 		{
-				// 			class: 'totalcols',
-				// 			data: [
-				// 				{
-				// 					data: [
-				// 						{
-				// 							text:'44444'
-				// 						}
-				// 					]
-				// 				},
-				// 				{
-				// 					colspan: 2,
-				// 					data: [
-				// 						{
-				// 							text:'5555'
-				// 						}
-				// 					]
-				// 				},
-				// 				{
-				// 					data: [
-				// 						{
-				// 							text:'66666'
-				// 						}
-				// 					]
-				// 				}
-				// 			]
-				// 		}
-				// 	]
-				// },
-
-				param2: {
+				eventTarget: '',
+				param: {
 					titleArr: [
 						{
-							text: 'aaaaa11'
+							text: 'aaaaa11',
+							style: {
+								width: '100px'
+							}
 						},{
-							text: 'aaaaa12'
+							text: 'aaaaa12',
+							style: {
+								width: '100px'
+							}
 						},{
-							text: 'aaaaa13'
+							text: 'aaaaa13',
+							style: {
+								width: '100px'
+							}
 						},{
-							text: 'aaaaa14'
+							text: 'aaaaa14',
+							style: {
+								width: '100px'
+							}
 						},{
-							text: 'aaaaa15'
+							text: 'aaaaa15',
+							style: {
+								width: '100px'
+							}
 						}
 					],
 					contentArr: [
@@ -265,6 +169,30 @@
 					]
 				}
 			}
+		},
+
+		created () {
+
+		},
+
+		methods: {
+			mousedown ($event, x) {
+				let eventTarget = $event.target;
+				let initWidth = parseInt(window.getComputedStyle(eventTarget).width) || 0;
+				this.eventTarget = eventTarget;
+				let fn = (e) => {
+					x.style.width = initWidth + e.pageX - $event.pageX + 'px';
+					console.log(x.style.width);
+				};
+				this.fn = fn;
+				eventTarget.addEventListener('mousemove', fn, false);
+			},
+
+			mouseup ($event, x) {
+				let fn = this.fn;
+				this.eventTarget.removeEventListener('mousemove', fn, false);
+
+			},
 		}
 	};
 
@@ -279,6 +207,9 @@
 			word-break: break-all;
 			border-collapse: collapse;
 			font-size: 24px;
+			th {
+				cursor: e-resize
+			}
 			td, th {
 				padding: 5px;
 				border: solid 1px #999;

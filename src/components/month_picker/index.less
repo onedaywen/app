@@ -13,7 +13,8 @@
 		padding: 0 10px;
 		border:solid 1px #ccc;
 		line-height: 36px;
-
+		background: url('../tree/img/right.png') no-repeat 95% 50%;
+        background-size: 15px 15px;
 	}
 	.month-mask {
 		position: fixed;
@@ -21,7 +22,7 @@
 		top: 0;
 		bottom: 0;
 		right: 0;
-		background-color: rgba(0, 0, 0, .1);
+		// background-color: rgba(0, 0, 0, .1);
 		cursor: pointer;
 	}
 	.month-content {
@@ -32,6 +33,17 @@
 		min-width: 160px;
 		left: 0;
 		top: 0;
+		.clear-item {
+			@h: 16px;
+			position: absolute;
+			right: 20px;
+			top: -26px;
+			width: @h;
+			height: @h;
+			border-radius: 50%;
+			background: url(./img/del-round.png);
+			background-size: @h @h;
+		}
 		.year-box {
 			box-sizing: border-box;
 			background-color: #f1f4f7;
@@ -41,13 +53,22 @@
 			.chooseyear {
 				cursor: pointer;
 				font-size: 18px;
+				user-select: none;
+				color: #999;
 				&:hover {
 					color: #1abc9c;
 				}
 			}
+			> .not-selectable {
+				color: #ccc;
+				cursor: not-allowed;
+				&:hover {
+					color: #ccc;
+				}
+			}
 			.yearval {
+				user-select: none;
 				text-align: center;
-				cursor: pointer;
 			}
 		}
 		.month-details {
@@ -58,6 +79,7 @@
 					text-align: center;
 					line-height: 36px;
 					cursor: pointer;
+					user-select: none;
 					&:hover {
 						background-color: #f1f4f7;
 						color: #1abc9c;
@@ -67,18 +89,29 @@
 					background-color: #f1f4f7;
 					color: #1abc9c;
 				}
+				> .not-selectable {
+					color: #999;
+					&:hover {
+						color: #999;
+						background-color: #fff;
+						cursor: not-allowed;
+					}
+				}
 			}
 		}
 		.month-btn {
 			box-sizing: border-box;
 			height: 36px;
 			line-height: 36px;
-			color: #1abc9c;
+			
 			font-size: 14px;
 			border-top: solid 1px #efefef;
 			text-align: right;
 			padding-right: 24px;
 			cursor: pointer;
+			> span {
+				color: #1abc9c;
+			}
 			&:hover {
 				opacity: .8;
 			}

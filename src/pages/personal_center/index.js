@@ -40,10 +40,15 @@ export default {
 			});
 			p.then(data => {
 				const param = this.$store.state.personalCenter.param;
-				for(let i = 0; i< 10; i++){
+				for(let i = 0; i< 100; i++){
 					param.data.push(`src/common/images/${i%3 + 1}.jpg?${Math.random()}`);
 				}
 			})
+		},
+		getBase64 () {
+			let fr = new FileReader();
+			// http://7xkge0.dl1.z0.glb.clouddn.com/fcappmallazh5eg4h0gt.jpg
+			
 		}
 	}
 };

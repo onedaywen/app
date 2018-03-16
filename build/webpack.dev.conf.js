@@ -29,7 +29,7 @@ module.exports = {
 	output: {
 		path: resolve(__dirname, '../dist'),
 		filename: 'js/[name]_[hash].js',
-		publicPath: 'http://192.168.1.3:8080/',
+		publicPath: 'http://10.204.240.83:8080/',
 
 	},
 	
