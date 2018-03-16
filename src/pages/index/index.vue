@@ -3,7 +3,12 @@
 		<!-- <div style="width: 220px;">
 			<MonthPicker :param="monthPickerParam"/>
 		</div> -->
-		<rowscolsTable/>
+		<div style="width: 1000px;">
+			<rowscolsTable/>
+		</div>
+	<!-- 	<div style="width: 1000px;overflow: auto;">
+			<rowscolsTable/>
+		</div> -->
 		<div class="index-content">
 
 			<ul class="nav-list clear" >

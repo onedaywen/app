@@ -11,7 +11,6 @@
 
 <script type="text/javascript">
 	import Navigation from 'components/navigation/index.vue';
-	console.log(Navigation)
 	export default {
 		components: {
 			Navigation,

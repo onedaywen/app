@@ -51,7 +51,7 @@ export default {
 			};
 			const p = ajax(param);
 			p.then(data => {
-				console.log(data)
+				// console.log(data)
 			});
 			// p.abort();
 			

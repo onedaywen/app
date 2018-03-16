@@ -1,53 +1,129 @@
 <template>
-	<div class="rowscols-table-box">
-		<table class="rowscols-table">
-			<tr>
-				<td v-for="x in param.titleArr" 
-					:style="x.style" 
-					:class="x.class" :width="x.width"
-					@mousedown="mousedown($event, x)"
-					@mouseup="mouseup($event, x)">
-					<TdTemplate :param="x"/>
-				</td>
-			</tr>
-			<tr v-for="x in param.contentArr"  
+<div class="rowscols-table-box">
+	<table class="rowscols-table" ref="rowscolsTable">
+		<tr class="rowscols-table-title">
+			<td v-for="x in param.titleArr" 
 				:style="x.style" 
-				:class="x.class">
-				<td v-for="y in x"
-					:style="y.style" 
-					:class="y.class"
-					:colspan="y.colspan || 1"
-					:rowspan="y.rowspan || 1">
-					<TdTemplate :param="y"/>
-				</td>
-			</tr>
-		</table>
-	</div>
+				:class="x.class" :width="x.width">
+
+				<span v-if="x && x.text" @click="x.click && x.click()">
+					{{ x.text }}
+				</span>
+				
+				<span v-if="!x || typeof x === 'string' || typeof x === 'number'">
+					{{ x || '' }}
+				</span>
+
+				<img :src="x.src"
+					 v-if="x.src"
+					 @click="x.click && x.click()">
+
+				<input tparampe="text" name="" 
+				   v-if="x.vmodel"
+				   v-model="x.vmodel"
+				   :readonly="x.readonly"
+				   @focus="x.focus && x.focus()"
+				   @change="x.change && x.change()">
+			</td>
+		</tr>
+
+		<tr v-for="x in param.contentArr"  
+			:style="x.style" 
+			:class="x.class"  class="rowscols-table-content">
+			<td v-for="y in x"
+				:style="y.style" 
+				:class="y.class"
+				:colspan="y.colspan || 1"
+				:rowspan="y.rowspan || 1">
+				
+				<span v-if="y && y.text" @click="y.click && y.click()">
+					{{ y.text }}
+				</span>
+				
+				<span v-if="!y || typeof y === 'string' || typeof y === 'number'">
+					{{ y || '' }}
+				</span>
+
+				<img :src="y.src"
+					 v-if="y.src"
+					 @click="y.click && y.click()">
+
+				<input type="text" name="" 
+				   v-if="y.vmodel"
+				   v-model="y.vmodel"
+				   :readonly="y.readonly"
+				   @focus="y.focus && y.focus()"
+				   @change="y.change && y.change()">
+
+
+				<div v-if="y.data && y.data.length"
+					 v-for="z in y.data"
+					 :style="z.style" 
+					 :class="z.class">
+					 
+					<span v-if="z && z.text" @click="z.click && z.click()">
+						{{ z.text }}
+					</span>
+					
+					<span v-if="!z || typeof z === 'string' || typeof z === 'number'">
+						{{ z || '' }}
+					</span>
+
+					<img :src="z.src"
+						 v-if="z.src"
+						 @click="z.click && z.click()">
+
+					<input tparampe="text" name="" 
+					   v-if="z.vmodel"
+					   v-model="z.vmodel"
+					   :readonly="z.readonly"
+					   @focus="z.focus && z.focus()"
+					   @change="z.change && z.change()">
+
+				</div>
+
+			</td>
+		</tr>
+	</table>
+</div>
 </template>
 
 
 <script type="text/javascript">
-	import TdTemplate from './td_template.vue';
 	const rowscolsTable = {
 		name: 'rowscolsTable',
 		components: {
-			TdTemplate
+
 		},
 
 		data () {
 			return {
-				eventTarget: '',
 				param: {
 					titleArr: [
-						'商品',
-						'单价/数量',
-						'实付金额',
-						'运费',
-						'订单/包裹状态',
-						'买家',
-						'物流信息',
 						{
+							text: '商品',
+							width: 100
+						},{
+							text: '单价/数量',
+							width: 100
+						},{
+							text: '实付金额',
+							width: 100
+						},{
+							text: '运费',
+							width: 100
+						},{
+							text: '订单/包裹状态',
+							width: 100
+						},{
+							text: '买家',
+							width: 100
+						},{
+							text: '物流信息',
+							width: 100
+						},{
 							text: '操作',
+							width: 100,
 							click () {
 								alert('操作')
 							}
@@ -117,25 +193,28 @@
 							'19.9*100',
 							'1990',
 							{
-								rowspan: 3,
+								rowspan: 5,
 								text: '24.00'
 							},{
-								rowspan: 3,
+								rowspan: 5,
 								text: '退款完成'
 							},{
-								rowspan: 3,
+								rowspan: 5,
 								data: [
 									'买家姓名：温一天',
 									'买家手机号：13714034157'
 								]
 							},{
-								rowspan: 3,
+								rowspan: 5,
 								text: '商品已发往深圳松岗分拨中心'
 							},{
-								rowspan: 3,
+								rowspan: 5,
 								data: [
 									{
 										class: 'confirm',
+										style: {
+											color: '#1abc9c'
+										},
 										text: '确认收货',
 										click () {
 											alert('确认收货')
@@ -186,6 +265,48 @@
 							},
 							'39.9*100',
 							'3990'
+						],
+						[
+							{
+								data: [
+									{
+										src: 'asdfasdf.jpg',
+										click () {
+											alert('全屏查看图片')
+										},
+									},{
+										text: '商品名称003',
+									},{
+										text: '商品规格003',
+									},{
+										text: '商品留言003',
+									}
+								]
+								
+							},
+							'39.9*100',
+							'3990'
+						],
+						[
+							{
+								data: [
+									{
+										src: 'asdfasdf.jpg',
+										click () {
+											alert('全屏查看图片')
+										},
+									},{
+										text: '商品名称003',
+									},{
+										text: '商品规格003',
+									},{
+										text: '商品留言003',
+									}
+								]
+								
+							},
+							'39.9*100',
+							'3990'
 						]
 					]
 				}
@@ -196,24 +317,48 @@
 
 		},
 
+		mounted () {
+			const tableBoxEle = document.querySelector('.rowscols-table-box');
+			tableBoxEle.addEventListener('mousewheel', (e) => {
+				e = e || window.event;
+				if(tableBoxEle.scrollWidth === tableBoxEle.clientWidth) {
+					return;
+				}
+				if(tableBoxEle.scrollWidth > tableBoxEle.clientWidth) {
+					e.preventDefault();
+				}
+
+				this.throttle(fn, e, this, 10);
+			})
+			function fn(e) {
+				let i = 20;
+        		if (e.wheelDelta) {           
+			        if (e.wheelDelta > 0) {
+			           i = -i;
+			        }
+			        if (e.wheelDelta < 0) {
+			        	i = i;
+			        }
+			    } else if (e.detail) { 
+			        if (e.detail > 0) {
+			        	i = -i;
+			        }
+			        if (e.detail < 0) {
+			        	i = i;
+			        }
+			    }
+			    tableBoxEle.scrollLeft += i;
+			    console.log(tableBoxEle.scrollWidth, tableBoxEle.clientWidth)
+			}
+		},
+
 		methods: {
-			mousedown ($event, x) {
-				let eventTarget = $event.target;
-				let initWidth = parseInt(window.getComputedStyle(eventTarget).width) || 0;
-				this.eventTarget = eventTarget;
-				let fn = (e) => {
-					x.style.width = initWidth + e.pageX - $event.pageX + 'px';
-					console.log(x.style.width);
-				};
-				this.fn = fn;
-				eventTarget.addEventListener('mousemove', fn, false);
-			},
-
-			mouseup ($event, x) {
-				let fn = this.fn;
-				this.eventTarget.removeEventListener('mousemove', fn, false);
-
-			},
+			throttle (fn, args, context, delay) {
+				clearTimeout(fn.tId);
+				fn.tId = setTimeout(() => {
+					fn.call(context, args)
+				}, delay);
+			}
 		}
 	};
 
@@ -221,31 +366,39 @@
 </script>
 
 <style type="text/css" lang="less">
-	.rowscols-table-box {
-		.rowscols-table {
-			width: 100%;
-			text-align: center;
-			word-break: break-all;
-			border-collapse: collapse;
-			font-size: 24px;
-			th {
-				cursor: e-resize
+.rowscols-table-box {
+	overflow: auto;
+	.rowscols-table {
+		width: 100%;
+		text-align: center;
+		word-break: break-all;
+		border-collapse: collapse;
+		font-size: 15px;
+		table-layout: fixed;
+		
+		.rowscols-table-title {
+			color: #333;
+			background-color: #f1f4f7;
+		}
+		.rowscols-table-content {
+			color: #666;
+		}
+
+		td, th {
+			padding: 5px;
+			border: solid 1px #ddd;
+			input {
+				width: 80%;
+				padding: 0 10px;
+				height: 30px;
+				vertical-align: middle;
 			}
-			td, th {
-				padding: 5px;
-				border: solid 1px #999;
-				input {
-					width: 80%;
-					padding: 0 10px;
-					height: 30px;
-					vertical-align: middle;
-				}
-				img {
-					width: 80%;
-					height: auto;
-					vertical-align: middle;
-				}
+			img {
+				width: 80%;
+				height: auto;
+				vertical-align: middle;
 			}
 		}
 	}
+}
 </style>
