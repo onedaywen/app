@@ -2,13 +2,13 @@
 	<div class="rowscols-table-box">
 		<table class="rowscols-table">
 			<tr>
-				<th v-for="x in param.titleArr" 
+				<td v-for="x in param.titleArr" 
 					:style="x.style" 
 					:class="x.class" :width="x.width"
 					@mousedown="mousedown($event, x)"
 					@mouseup="mouseup($event, x)">
 					<TdTemplate :param="x"/>
-				</th>
+				</td>
 			</tr>
 			<tr v-for="x in param.contentArr"  
 				:style="x.style" 
