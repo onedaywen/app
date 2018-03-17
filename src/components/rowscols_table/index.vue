@@ -347,8 +347,7 @@
 			        	i = i;
 			        }
 			    }
-			    tableBoxEle.scrollLeft += i;
-			    console.log(tableBoxEle.scrollWidth, tableBoxEle.clientWidth)
+			   tableBoxEle.scrollLeft += i;
 			}
 		},
 
