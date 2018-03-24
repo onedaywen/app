@@ -25,3 +25,5 @@ div {
   .height(60);
 }
 ```
+## 项目目录结构
+![项目目录结构](https://github.com/onedaywen/app/blob/master/src/common/images/folder.png)
