@@ -4,20 +4,7 @@ const resolve = path.resolve;
 const src = resolve(__dirname, '../src');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const extractTextPlugin = require("extract-text-webpack-plugin");
-
-const getIPAdress = function() {
-    var interfaces = require('os').networkInterfaces();
-    for (var devName in interfaces) {
-        var iface = interfaces[devName];
-        for (var i = 0; i < iface.length; i++) {
-            var alias = iface[i];
-            if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
-                return alias.address;
-            }
-        }
-    }
-}
-
+const getIPAddress = require('./getIPAddress.js');
 module.exports = {
 	entry: {
 		app: resolve(__dirname, '../src/app.js'),
@@ -27,15 +14,12 @@ module.exports = {
 	output: {
 		path: resolve(__dirname, '../dist'),
 		filename: 'js/[name]_[hash].js',
-		publicPath: 'http://192.168.1.3:8080/',
+		// publicPath: '',
 
 	},
 	
 	devServer: {
-		host: getIPAdress() || '127.0.0.1',
-		proxy: {
-        	'/f/d': 'http://localhost:8000'
-	    }
+		host: getIPAddress() || '127.0.0.1',
 	},
 
 	module: {

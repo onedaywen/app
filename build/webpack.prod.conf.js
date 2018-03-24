@@ -15,7 +15,7 @@ module.exports = {
 	output: {
 		path: resolve(__dirname, '../dist'),
 		filename: 'js/[name]_[hash].js',
-		publicPath: 'http://www.baidu.com'
+		publicPath: ''
 	},
 	
 	module: {
