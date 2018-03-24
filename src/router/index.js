@@ -3,25 +3,26 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const Index = () => import('src/pages/index/index.vue');
-const Shopcar = () => import('src/pages/shopcar/index.vue');
-const PersonalCenter = () => import('src/pages/personal_center/index.vue');
+const PageA = () => import('src/pages/page_a/index.vue');
+const PageB = () => import('src/pages/page_b/index.vue');
+const PageC = () => import('src/pages/page_c/index.vue');
 const routes = [
 	{
 		path: '/',
 		component: Index
 	},
 	{
-		path: '/index',
-		component: Index
+		path: '/a',
+		component: PageA
 	},
-	{
-		path: '/shopcar',
-		component: Shopcar
-	},
-	{
-		path: '/personal_center',
-		component: PersonalCenter
-	}
+    {
+        path: '/b',
+        component: PageB
+    },
+    {
+        path: '/c',
+        component: PageC
+    }
 ];
 
 const router = new VueRouter({

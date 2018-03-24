@@ -1,9 +1,6 @@
 <template>
-	<div class="index">
+	<div class="personal-center">
 		<h2 class="title">{{ title }}</h2>
-		<div class="index-content">
-			
-		</div>
 	</div>
 </template>
 

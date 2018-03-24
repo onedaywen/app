@@ -4,16 +4,16 @@
 			<router-view></router-view>
 		</transition>
 		<div>
-			<Navigation/>
+			<Nav/>
 		</div>
 	</div>
 </template>
 
 <script type="text/javascript">
-	import Navigation from 'components/navigation/index.vue';
+	import Nav from 'components/nav/index.vue';
 	export default {
 		components: {
-			Navigation,
+			Nav,
 		}
 	}
 </script>

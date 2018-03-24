@@ -4,8 +4,6 @@ const resolve = path.resolve;
 const src = resolve(__dirname, '../src');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const extractTextPlugin = require("extract-text-webpack-plugin");
-const mockWebpackPlugin = require('mock-webpack-plugin');
-const mockConfig = require('../mock/config.js');
 
 const getIPAdress = function() {
     var interfaces = require('os').networkInterfaces();
@@ -51,12 +49,6 @@ module.exports = {
 				test: /\.vue$/,
 				use: 'vue-loader',
 				include: src,
-	      //       options: {
-				   //  use: {
-				   //    less: 'vue-style-loader!css-loader!less-loader',
-				   //  },
-				   //  extractCSS: true
-			    // }
 			},
 			{
 				test: /\.(png|woff|woff2|eot|ttf|svg|jpg|gif)$/,
@@ -68,6 +60,13 @@ module.exports = {
 				use: extractTextPlugin.extract({
 					fallback: 'style-loader',
 					use: ['css-loader', 'less-loader']
+				})
+			},
+			{ 
+				test: /\.css$/, 
+				use: extractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: ['css-loader']
 				})
 			},
 		]
@@ -90,10 +89,6 @@ module.exports = {
 	plugins: [
 		new htmlWebpackPlugin({
 			template: resolve(__dirname, '../src/index.html')
-		}),
-		new mockWebpackPlugin({
-	        config: mockConfig,
-	        port: 8000
 		}),
 		new webpack.ProvidePlugin({
 		  api: 'api'

@@ -1,9 +1,8 @@
 <template>
-	<keep-alive>
-		<div class="shopcar">
-			<uploadImage :param="uploadParam"/>
-		</div>
-	</keep-alive>
+	<div class="index">
+		<h2 class="title">{{ title }}</h2>
+		<div class="index-content"></div>
+	</div>
 </template>
 
 <script type="text/javascript">
@@ -12,5 +11,5 @@
 </script>
 
 <style type="text/css" lang="less">
-	
+	@import './index.less';
 </style>
